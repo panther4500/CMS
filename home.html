@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="home.css">
+    <title>Welcome to CMS</title>
+</head>
+<body>
+  <div id="progressbar"></div>
+  
+  <script>
+  document.ready = function( callback ) {
+	if( document.readyState != 'loading' ) {
+		callback();
+	}
+	else {
+		document.addEventListener( 'DOMContentLoaded', callback );
+	}
+};
+
+
+(function() {
+
+	document.ready( function() {
+
+		/* We have to know some stuff of the current screen, that we will get over the following variables */
+		let progressbar = document.getElementById( "progressbar" );
+		if( !!progressbar ) {
+
+			let body = document.getElementsByTagName( "body" )[0];
+			let window_height = body.offsetHeight;
+			let client_height = document.documentElement.clientHeight;
+
+			/* The following variables are for storing the neccessary scroll-data */
+			let last_known_scroll_position = 0;
+			let ticking = false;
+
+			/* This Event-Listener will hook onto the Scroll-Event of the Browser */
+			window.addEventListener( 'scroll', function( e ) {
+
+				last_known_scroll_position = window.scrollY;
+				if( !ticking ) {
+
+					window.requestAnimationFrame( function() {
+							
+						nowScrolling( last_known_scroll_position );
+						ticking = false;
+
+					});
+					ticking = true;
+
+				}
+
+			});
+
+			/*
+			I use the Client-Height for a accurate percentage of the current screen-state.
+			On window-resizing the variable "client_height" would stay the same, if I won't add this Event-Listener
+			*/
+			window.addEventListener( "resize", refactorScreenHeight );
+			var mutationObserver = new MutationObserver( refactorScreenHeight );
+			mutationObserver.observe(document.documentElement, {
+				attributes: true,
+				characterData: true,
+				childList: true,
+				subtree: true,
+				attributeOldValue: true,
+				characterDataOldValue: true
+			});
+
+			function refactorScreenHeight() {
+
+				client_height = document.documentElement.clientHeight;
+				window_height = body.offsetHeight;
+
+			}
+
+			function nowScrolling( last_known_scroll_position ) {
+
+				/* Here you also can add your own functions. The following is an example for the Scroll-Bar */
+				let percentage = last_known_scroll_position / ( window_height - client_height ) * 100;
+				progressbar.style.right = "calc( 100% - " + Math.round( percentage ) + "% )";
+
+			}
+
+		}
+
+	});
+
+})();
+  </script>
+  <div id="container0" class="center">
+    <div class="loader"><p class=load>CMS</p> </div>
+    
+  </div>
+  <script> 
+    document.onreadystatechange = function() { 
+        if (document.readyState !== "complete") { 
+            document.querySelector( 
+              "body").style.visibility = "hidden"; 
+            document.querySelector( 
+              "#container0").style.visibility = "visible"; 
+        } else { 
+            document.querySelector( 
+              "#container0").style.display = "none"; 
+            document.querySelector( 
+              "body").style.visibility = "visible"; 
+        } 
+    }; 
+  </script>   
+  
+  <header>
+      <img class="logo" src="logo1.JPG" alt="logo">
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+      <ul class="menu">
+        <li><a href="#home1">Get Started</a></li>
+        <li><a href="#about">Our Team</a></li>
+        <li><a href="#contact">Contact </a></li>
+		<li><a href="admin_login.html">Admin </a></li>
+		<li><a href="student_login.html" class="but">Sign-in</a></li>
+	
+      </ul>
+  </header>
+
+  
+    <div class="container" id="home1">
+        <div class="row">
+          <div class="col">
+            <span class="intro"><span style="font-size: 3.5rem; color: rgb(115, 75, 224);line-height: 4.5rem;font-weight: 600;">WELCOME TO</span> <br>COLLEGE MANAGEMENT SYSTEM</span><br>
+			<a href="student_login.html" class="myButton">Sign-in</a>
+          </div>
+          <div class="col" >
+            <img style="width: 40rem; margin-top: 8rem;" src="—Pngtree—modern flat design concept of_5332889.png" alt="cms">
+          </div>
+        </div>
+    </div>
+    
+	<hr id="about">
+    <h1 class="team">OUR TEAM</h1>
+	<div class="container" >
+		<div class="row">
+		  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+			<div class="our-team">
+			  <div class="picture">
+				<img class="img-fluid" src="https://picsum.photos/130/130?image=856">
+			  </div>
+			  <div class="team-content">
+				<h3 class="name">Atharva Pansare</h3>
+				<h4 class="title">Web Developer</h4>
+			  </div>
+			  
+				
+			</div>
+		  </div>
+			  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+			<div class="our-team">
+			  <div class="picture">
+				<img class="img-fluid" src="https://picsum.photos/130/130?image=856">
+			  </div>
+			  <div class="team-content">
+				<h3 class="name">Prabhat Panwar</h3>
+				<h4 class="title">Web Developer</h4>
+			  </div>
+			  
+			</div>
+		  </div>
+			  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+			<div class="our-team">
+			  <div class="picture">
+				<img class="img-fluid" src="https://picsum.photos/130/130?image=856">
+			  </div>
+			  <div class="team-content">
+				<h3 class="name">Nikunj Padia</h3>
+				<h4 class="title">Web Developer</h4>
+			  </div>
+			  
+			</div>
+		  </div>
+			  <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+			<div class="our-team">
+			  <div class="picture">
+				<img class="img-fluid" src="https://picsum.photos/130/130?image=856">
+			  </div>
+			  <div class="team-content">
+				<h3 class="name">Mehul Pansari</h3>
+				<h4 class="title">Web Developer</h4>
+			  </div>
+			  
+			</div>
+		  </div>
+		</div>
+	  </div>
+    
+	  <hr style="margin-top: 5rem;" id="contact">
+      <div class="container contact-form" >
+		<div class="contact-image">
+			<img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
+		</div>
+		<form method="post">
+			<h3>Drop Us a Message</h3>
+		   <div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<input type="text" name="txtName" class="form-control" placeholder="Your Name *" value="" />
+					</div>
+					<div class="form-group">
+						<input type="text" name="txtEmail" class="form-control" placeholder="Your Email *" value="" />
+					</div>
+					<div class="form-group">
+						<input type="text" name="txtPhone" class="form-control" placeholder="Your Phone Number *" value="" />
+					</div>
+					<div class="form-group">
+						<input type="submit" name="btnSubmit" class="btnContact" value="Send Message" />
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<textarea name="txtMsg" class="form-control" placeholder="Your Message *" style="width: 100%; height: 150px;"></textarea>
+					</div>
+				</div>
+			</div>
+		</form>
+       </div>
+      
+    
+
+	<!-- Footer -->
+    <footer class="text-center text-lg-start text-muted" style="background-color: rgba(198, 194, 255, 0.733);">
+	<!-- Section: Social media -->
+	<br>
+  
+	<!-- Section: Links  -->
+	<section class="">
+	  <div class="container text-center text-md-start mt-5">
+		<!-- Grid row -->
+		<div class="row mt-3">
+		  <!-- Grid column -->
+		  <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+			<!-- Content -->
+			<h6 class="text-uppercase fw-bold mb-4">
+			  <i class="fas fa-gem me-9"></i>CLASS MANAGEMENT SYSTEM
+			</h6>
+			<p>
+			  CMS is a complete solution for college database maanagement, providing data security and integrity. Easy to use UI with assistance to make best out of your time.
+			</p>
+		  </div>
+		  <!-- Grid column -->
+  
+		  <!-- Grid column -->
+		  <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+			<!-- Links -->
+			<h6 class="text-uppercase fw-bold mb-4">
+			  Sections
+			</h6>
+			<p>
+			  <a href="#!" class="text-reset">Admin</a>
+			</p>
+			<p>
+			  <a href="#!" class="text-reset">Student</a>
+			</p>
+			<p>
+			  <a href="#!" class="text-reset">Faculty</a>
+			</p>
+			
+		  </div>
+		  <!-- Grid column -->
+  
+		  <!-- Grid column -->
+		  <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+			<!-- Links -->
+			<h6 class="text-uppercase fw-bold mb-4">
+			  Useful links
+			</h6>
+			<p>
+			  <a href="#!" class="text-reset">Started</a>
+			</p>
+			<p>
+			  <a href="#!" class="text-reset">Team</a>
+			</p>
+			<p>
+			  <a href="#!" class="text-reset">Contact</a>
+			</p>
+			
+		  </div>
+		  <!-- Grid column -->
+  
+		  <!-- Grid column -->
+		  <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+			<!-- Links -->
+			<h6 class="text-uppercase fw-bold mb-4">
+			  Contact
+			</h6>
+			<p><i class="fas fa-home me-3"></i>Pune, India</p>
+			<p>
+			  <i class="fas fa-envelope me-3"></i>
+			  info@example.com
+			</p>
+			<p><i class="fas fa-phone me-3"></i> 1234567890</p>
+			
+		  </div>
+		  <!-- Grid column -->
+		</div>
+		<!-- Grid row -->
+	  </div>
+	</section>
+	<!-- Section: Links  -->
+  
+	<!-- Copyright -->
+	<div class="text-center p-4" style="background-color: rgb(115, 75, 224); color: cornsilk;">
+		<img src="logo1.JPG" style="max-height: 4rem;">
+	  
+	</div>
+	<!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+</body>
+</html>
